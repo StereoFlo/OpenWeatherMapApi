@@ -21,6 +21,8 @@ var_dump($owm->getStack());
 
   #### Погода на пять жней, 3-х часовой прогноз
   
+  Погода на 5 дней (используя буквенный указатель города и страны)
+  
   ```php
 $url = new \OpenWeatherMapApi\Url();
 $url->setAppId('api_key')
