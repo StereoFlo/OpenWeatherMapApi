@@ -98,7 +98,11 @@ class OpenWeatherMap
         try {
             $response = $this->client->request('get', $url);
             $tmpArr = \json_decode($response->getBody(), true);
-            var_dump($tmpArr);
+            if (isset($tmpArr['cnt']) && isset($tmpArr['list'])) {
+                $this->count = $tmpArr['cnt'];
+            } else {
+
+            }
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
