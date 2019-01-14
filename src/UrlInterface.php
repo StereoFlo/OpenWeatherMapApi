@@ -24,9 +24,7 @@ interface UrlInterface
     public function setType(string $type): Url ;
 
     /**
-     * @param City $city
-     *
      * @return string
      */
-    public function getUrl(City $city): string ;
+    public function getUrl(): string ;
 }

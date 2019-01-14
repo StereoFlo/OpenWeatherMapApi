@@ -23,6 +23,11 @@ class Url implements UrlInterface
     private $appId;
 
     /**
+     * @var City
+     */
+    private $city;
+
+    /**
      * @param string $appId
      *
      * @return Url
@@ -51,13 +56,22 @@ class Url implements UrlInterface
     /**
      * @param City $city
      *
+     * @return Url
+     */
+    public function setCity(City $city): Url
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    /**
      * @return string
      */
-    public function getUrl(City $city): string
+    public function getUrl(): string
     {
-        if ($city->getId()) {
-            return \sprintf(self::URL_PATTERN, $this->type, 'id', $city->getId(), $this->appId);
+        if ($this->city->getId()) {
+            return \sprintf(self::URL_PATTERN, $this->type, 'id', $this->city->getId(), $this->appId);
         }
-        return \sprintf(self::URL_PATTERN, $this->type, 'q', $city->getQuery(), $this->appId);
+        return \sprintf(self::URL_PATTERN, $this->type, 'q', $this->city->getQuery(), $this->appId);
     }
 }

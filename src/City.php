@@ -9,19 +9,19 @@ namespace OpenWeatherMapApi;
 class City
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $query;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $id;
 
     /**
      * @return string
      */
-    public function getQuery(): string
+    public function getQuery(): ?string
     {
         return $this->query;
     }
@@ -40,7 +40,7 @@ class City
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

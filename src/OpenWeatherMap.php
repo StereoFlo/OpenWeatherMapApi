@@ -4,7 +4,6 @@ namespace OpenWeatherMapApi;
 
 use GuzzleHttp\ClientInterface;
 use OpenWeatherMapApi\Data\Data;
-use OpenWeatherMapApi\Data\DataItem\Clouds;
 
 /**
  * Class OpenWeatherMap
@@ -12,11 +11,6 @@ use OpenWeatherMapApi\Data\DataItem\Clouds;
  */
 class OpenWeatherMap
 {
-    /**
-     * @var Credential
-     */
-    private $credential;
-
     /**
      * @var ClientInterface
      */
@@ -26,11 +20,6 @@ class OpenWeatherMap
      * @var City
      */
     private $city;
-
-    /**
-     * @var string
-     */
-    private $type = '';
 
     /**
      * @var int
@@ -50,18 +39,15 @@ class OpenWeatherMap
     /**
      * OpenWeatherMap constructor.
      *
-     * @param Credential      $credential
      * @param ClientInterface $client
      * @param City            $city
      * @param UrlInterface    $url
      */
-    public function __construct(Credential $credential, ClientInterface $client, City $city, UrlInterface $url, string $type)
+    public function __construct(ClientInterface $client, City $city, UrlInterface $url)
     {
-        $this->credential = $credential;
         $this->client     = $client;
         $this->city       = $city;
         $this->url        = $url;
-        $this->type       = $type;
     }
 
     /**
@@ -102,12 +88,17 @@ class OpenWeatherMap
         return $this;
     }
 
+    /**
+     * fillData
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function fillData()
     {
-        $url = $this->url->setAppId($this->credential->getAppId())->setType($this->type)->getUrl($this->city);
+        $url = $this->url->getUrl();
         try {
             $response = $this->client->request('get', $url);
-            $tmpArr = \json_decode($response->getBody());
+            $tmpArr = \json_decode($response->getBody(), true);
+            var_dump($tmpArr);
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
