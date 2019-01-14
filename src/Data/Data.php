@@ -5,64 +5,63 @@ namespace OpenWeatherMapApi\Data;
 use OpenWeatherMapApi\Data\DataItem\Clouds;
 use OpenWeatherMapApi\Data\DataItem\Coord;
 use OpenWeatherMapApi\Data\DataItem\Main;
-use OpenWeatherMapApi\Data\DataItem\PrecipitationInterface;
 use OpenWeatherMapApi\Data\DataItem\Rain;
 use OpenWeatherMapApi\Data\DataItem\Snow;
 use OpenWeatherMapApi\Data\DataItem\Sys;
-use OpenWeatherMapApi\Data\DataItem\Visibility;
+use OpenWeatherMapApi\Data\DataItem\Weather\WeatherItem;
 use OpenWeatherMapApi\Data\DataItem\Wind;
-use OpenWeatherMapApi\Data\Weather\WeatherItem;
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
 
 /**
  * Class Data
  * @package OpenWeatherMapApi\Data
  */
-class Data
+class Data extends AbstractInitializer
 {
     /**
      * @var Clouds
      */
-    private $clouds;
+    protected $clouds;
 
     /**
      * @var Coord
      */
-    private $coord;
+    protected $coord;
 
     /**
      * @var Main
      */
-    private $main;
+    protected $main;
 
     /**
      * @var Snow
      */
-    private $snow;
+    protected $snow;
 
     /**
      * @var Rain
      */
-    private $rain;
+    protected $rain;
 
     /**
      * @var Sys
      */
-    private $sys;
+    protected $sys;
 
     /**
-     * @var Visibility
+     * @var int
      */
-    private $visibility;
+    protected $visibility;
 
     /**
      * @var Wind
      */
-    private $wind;
+    protected $wind;
 
     /**
      * @var WeatherItem[]
      */
-    private $weather;
+    protected $weather;
 
     /**
      * @return Clouds
@@ -70,17 +69,6 @@ class Data
     public function getClouds(): Clouds
     {
         return $this->clouds;
-    }
-
-    /**
-     * @param Clouds $clouds
-     *
-     * @return Data
-     */
-    public function setClouds(Clouds $clouds): Data
-    {
-        $this->clouds = $clouds;
-        return $this;
     }
 
     /**
@@ -92,33 +80,11 @@ class Data
     }
 
     /**
-     * @param Coord $coord
-     *
-     * @return Data
-     */
-    public function setCoord(Coord $coord): Data
-    {
-        $this->coord = $coord;
-        return $this;
-    }
-
-    /**
      * @return Main
      */
     public function getMain(): Main
     {
         return $this->main;
-    }
-
-    /**
-     * @param Main $main
-     *
-     * @return Data
-     */
-    public function setMain(Main $main): Data
-    {
-        $this->main = $main;
-        return $this;
     }
 
     /**
@@ -130,33 +96,11 @@ class Data
     }
 
     /**
-     * @param PrecipitationInterface $snow
-     *
-     * @return Data
-     */
-    public function setSnow(PrecipitationInterface $snow): Data
-    {
-        $this->snow = $snow;
-        return $this;
-    }
-
-    /**
      * @return Rain
      */
     public function getRain(): Rain
     {
         return $this->rain;
-    }
-
-    /**
-     * @param PrecipitationInterface $rain
-     *
-     * @return Data
-     */
-    public function setRain(PrecipitationInterface $rain): Data
-    {
-        $this->rain = $rain;
-        return $this;
     }
 
     /**
@@ -168,33 +112,11 @@ class Data
     }
 
     /**
-     * @param Sys $sys
-     *
-     * @return Data
+     * @return int
      */
-    public function setSys(Sys $sys): Data
-    {
-        $this->sys = $sys;
-        return $this;
-    }
-
-    /**
-     * @return Visibility
-     */
-    public function getVisibility(): Visibility
+    public function getVisibility(): int
     {
         return $this->visibility;
-    }
-
-    /**
-     * @param Visibility $visibility
-     *
-     * @return Data
-     */
-    public function setVisibility(Visibility $visibility): Data
-    {
-        $this->visibility = $visibility;
-        return $this;
     }
 
     /**
@@ -206,17 +128,6 @@ class Data
     }
 
     /**
-     * @param Wind $wind
-     *
-     * @return Data
-     */
-    public function setWind(Wind $wind): Data
-    {
-        $this->wind = $wind;
-        return $this;
-    }
-
-    /**
      * @return WeatherItem[]
      */
     public function getWeather(): array
@@ -225,13 +136,47 @@ class Data
     }
 
     /**
-     * @param WeatherItem $weather
+     * @param $val
+     * @param $prop
      *
-     * @return Data
+     * @return $this
      */
-    public function setWeather(WeatherItem $weather): Data
+    protected function initPropertiesCustom($val, $prop): self
     {
-        $this->weather[] = $weather;
+        switch ($prop) {
+            case 'coord':
+                $this->coord = Coord::create($val);
+                break;
+            case 'weather':
+                if (\is_array($val)) {
+                    foreach ($val as $weatherItem) {
+                        $this->weather[] = WeatherItem::create($weatherItem);
+                    }
+                }
+                break;
+            case 'main':
+                $this->main = Main::create($val);
+                break;
+            case 'wind':
+                $this->wind = Wind::create($val);
+                break;
+            case 'clouds':
+                $this->clouds = Clouds::create($val);
+                break;
+            case 'rain':
+                $this->rain = Rain::create($val);
+                break;
+            case 'snow':
+                $this->snow = Snow::create($val);
+                break;
+            case 'sys':
+                $this->sys = Sys::create($val);
+                break;
+            case 'visibility':
+                $this->visibility = $val;
+                break;
+        }
+
         return $this;
     }
 }

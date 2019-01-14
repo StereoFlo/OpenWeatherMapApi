@@ -2,54 +2,49 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Main
  * @package OpenWeatherMapApi\Data
  */
-class Main
+class Main extends AbstractInitializer
 {
     /**
      * @var float
      */
-    private $temp;
+    protected $temp;
 
     /**
      * @var float
      */
-    private $pressure;
+    protected $pressure;
 
     /**
      * @var float
      */
-    private $humidity;
+    protected $humidity;
 
     /**
      * @var float
      */
-    private $tempMax;
+    protected $tempMax;
 
     /**
      * @var float
      */
-    private $tempMin;
+    protected $tempMin;
 
     /**
-     * Main constructor.
-     *
-     * @param float $temp
-     * @param float $pressure
-     * @param float $humidity
-     * @param float $tempMax
-     * @param float $tempMin
+     * @var array
      */
-    public function __construct(float $temp, float $pressure, float $humidity, float $tempMax, float $tempMin)
-    {
-        $this->temp     = $temp;
-        $this->pressure = $pressure;
-        $this->humidity = $humidity;
-        $this->tempMax  = $tempMax;
-        $this->tempMin  = $tempMin;
-    }
+    protected static $initPropertiesMap = [
+        'temp'     => 'temp',
+        'pressure' => 'pressure',
+        'humidity' => 'humidity',
+        'temp_max' => 'tempMax',
+        'temp_min' => 'tempMin',
+    ];
 
     /**
      * @return float

@@ -2,32 +2,27 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Wind
  * @package OpenWeatherMapApi\Data
  */
-class Wind
+class Wind extends AbstractInitializer
 {
-    /**
-     * @var int
-     */
-    private $speed;
-    /**
-     * @var int
-     */
-    private $deg;
+    protected static $initPropertiesMap = [
+        'speed' => 'speed',
+        'deg'   => 'deg',
+    ];
 
     /**
-     * Wind constructor.
-     *
-     * @param int $speed
-     * @param int $deg
+     * @var int
      */
-    public function __construct(int $speed, int $deg)
-    {
-        $this->speed = $speed;
-        $this->deg = $deg;
-    }
+    protected $speed;
+    /**
+     * @var int
+     */
+    protected $deg;
 
     /**
      * @return int

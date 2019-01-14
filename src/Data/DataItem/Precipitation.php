@@ -2,11 +2,13 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Precipitation
  * @package OpenWeatherMapApi\Data
  */
-abstract class Precipitation implements PrecipitationInterface
+abstract class Precipitation extends AbstractInitializer implements PrecipitationInterface
 {
     const TYPE = '';
 
@@ -21,16 +23,12 @@ abstract class Precipitation implements PrecipitationInterface
     protected $threeHour;
 
     /**
-     * Precipitation constructor.
-     *
-     * @param int $oneHour
-     * @param int $theeHour
+     * @var array
      */
-    public function __construct(int $oneHour, int $theeHour)
-    {
-        $this->oneHour   = $oneHour;
-        $this->threeHour = $theeHour;
-    }
+    protected static $initPropertiesMap = [
+        '1h' => 'oneHour',
+        '3h' => 'threeHour',
+    ];
 
     /**
      * @return string

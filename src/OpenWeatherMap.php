@@ -17,11 +17,6 @@ class OpenWeatherMap
     private $client;
 
     /**
-     * @var City
-     */
-    private $city;
-
-    /**
      * @var int
      */
     private $count = 0;
@@ -40,14 +35,13 @@ class OpenWeatherMap
      * OpenWeatherMap constructor.
      *
      * @param ClientInterface $client
-     * @param City            $city
      * @param UrlInterface    $url
      */
-    public function __construct(ClientInterface $client, City $city, UrlInterface $url)
+    public function __construct(ClientInterface $client, UrlInterface $url)
     {
         $this->client     = $client;
-        $this->city       = $city;
         $this->url        = $url;
+        $this->fillData();
     }
 
     /**
@@ -94,15 +88,20 @@ class OpenWeatherMap
      */
     public function fillData()
     {
-        $url = $this->url->getUrl();
         try {
+            $url = $this->url->getUrl();
             $response = $this->client->request('get', $url);
             $tmpArr = \json_decode($response->getBody(), true);
             if (isset($tmpArr['cnt']) && isset($tmpArr['list'])) {
                 $this->count = $tmpArr['cnt'];
+                foreach ($tmpArr['list'] as $item) {
+                    $this->stack[] = Data::create($item);
+                }
             } else {
-
+                $this->count = 1;
+                $this->stack[] = Data::create($tmpArr);
             }
+            return $this;
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }

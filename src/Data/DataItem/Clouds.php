@@ -2,26 +2,25 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Clouds
  * @package OpenWeatherMapApi\Data
  */
-class Clouds
+class Clouds extends AbstractInitializer
 {
     /**
      * @var int
      */
-    private $all;
+    protected $all;
 
     /**
-     * Clouds constructor.
-     *
-     * @param int $all
+     * @var array
      */
-    public function __construct(int $all)
-    {
-        $this->all = $all;
-    }
+    protected static $initPropertiesMap = [
+        'all' => 'all'
+    ];
 
     /**
      * @return int

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace OpenWeatherMapApi\Data\PropertyInitializer;
+namespace OpenWeatherMapApi\PropertyInitializer;
 
 /**
  * Trait InitializerTrait
- * @package OpenWeatherMapApi\Data\PropertyInitializer
+ * @package OpenWeatherMapApi\PropertyInitializer
  */
 trait InitializerTrait
 {

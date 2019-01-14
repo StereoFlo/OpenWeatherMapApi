@@ -1,10 +1,10 @@
 <?php
 
-namespace OpenWeatherMapApi\Data\PropertyInitializer;
+namespace OpenWeatherMapApi\PropertyInitializer;
 
 /**
  * Class AbstractInitializer
- * @package OpenWeatherMapApi\Data\PropertyInitializer
+ * @package OpenWeatherMapApi\PropertyInitializer
  */
 abstract class AbstractInitializer implements \ArrayAccess
 {

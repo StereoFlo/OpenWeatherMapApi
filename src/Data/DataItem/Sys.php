@@ -2,38 +2,37 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Sys
  * @package OpenWeatherMapApi\Data
  */
-class Sys
+class Sys extends AbstractInitializer
 {
     /**
-     * @var string
+     * @var array
      */
-    private $country;
-    /**
-     * @var string
-     */
-    private $sunrise;
-    /**
-     * @var string
-     */
-    private $sunset;
+    protected static $initPropertiesMap = [
+        'country' => 'country',
+        'sunrise' => 'sunrise',
+        'sunset'  => 'sunset',
+    ];
 
     /**
-     * Sys constructor.
-     *
-     * @param string $country
-     * @param string $sunrise
-     * @param string $sunset
+     * @var string
      */
-    public function __construct(string $country, string $sunrise, string $sunset)
-    {
-        $this->country = $country;
-        $this->sunrise = $sunrise;
-        $this->sunset = $sunset;
-    }
+    protected $country;
+
+    /**
+     * @var string
+     */
+    protected $sunrise;
+
+    /**
+     * @var string
+     */
+    protected $sunset;
 
     /**
      * @return string

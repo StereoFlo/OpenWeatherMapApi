@@ -2,33 +2,31 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+
 /**
  * Class Coord
  * @package OpenWeatherMapApi\Weather
  */
-class Coord
+class Coord extends AbstractInitializer
 {
     /**
      * @var float
      */
-    private $latitude = 0.0;
+    protected $latitude = 0.0;
 
     /**
      * @var float
      */
-    private $longitude = 0.0;
+    protected $longitude = 0.0;
 
     /**
-     * Coord constructor.
-     *
-     * @param float $latitude
-     * @param float $longitude
+     * @var array
      */
-    public function __construct(float $latitude, float $longitude)
-    {
-        $this->latitude  = $latitude;
-        $this->longitude = $longitude;
-    }
+    protected static $initPropertiesMap = [
+        'lon' => 'longitude',
+        'lat' => 'latitude'
+    ];
 
     /**
      * @return float

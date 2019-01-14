@@ -1,10 +1,10 @@
 <?php
 
-namespace OpenWeatherMapApi\Data\PropertyInitializer;
+namespace OpenWeatherMapApi\PropertyInitializer;
 
 /**
  * Trait ArrayLikeTrait
- * @package OpenWeatherMapApi\Data\PropertyInitializer
+ * @package OpenWeatherMapApi\PropertyInitializer
  */
 trait ArrayLikeTrait
 {

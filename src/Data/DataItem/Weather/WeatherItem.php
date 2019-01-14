@@ -1,48 +1,44 @@
 <?php
 
-namespace OpenWeatherMapApi\Data\Weather;
+namespace OpenWeatherMapApi\Data\DataItem\Weather;
+
+use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
 
 /**
  * Class WeatherItem
  * @package OpenWeatherMapApi\Data\Weather
  */
-class WeatherItem
+class WeatherItem extends AbstractInitializer
 {
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $main;
+    protected $main;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      */
-    private $icon;
+    protected $icon;
 
     /**
-     * WeatherItem constructor.
-     *
-     * @param int    $id
-     * @param string $main
-     * @param string $description
-     * @param string $icon
+     * @var array
      */
-    public function __construct(int $id, string $main, string $description, string $icon)
-    {
-        $this->id          = $id;
-        $this->main        = $main;
-        $this->description = $description;
-        $this->icon        = $icon;
-    }
+    protected static $initPropertiesMap = [
+        'id'          => 'id',
+        'main'        => 'main',
+        'description' => 'description',
+        'icon'        => 'icon',
+    ];
 
     /**
      * @return int
