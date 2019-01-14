@@ -8,7 +8,6 @@
  
   ```php
 $url = new \OpenWeatherMapApi\Url();
-$url = new \OpenWeatherMapApi\Url();
 $url->setAppId('api_key')
     ->setType(\OpenWeatherMapApi\Url::TYPE_WEATHER)
     ->setCity((new \OpenWeatherMapApi\City())->setQuery('Saint Petersburg, RU'));
