@@ -1,7 +1,6 @@
 <?php
 
-
-namespace OpenWeatherMapApi\Data;
+namespace OpenWeatherMapApi\Data\DataItem;
 
 /**
  * Class Precipitation
