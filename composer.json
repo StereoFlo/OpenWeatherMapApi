@@ -3,7 +3,9 @@
     "description": "open-weather-map-api",
     "type": "library",
     "license": "MIT",
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
     "autoload": {
         "psr-4": {
             "OpenWeatherMapApi\\": "src/"
