@@ -1,0 +1,12 @@
+{
+    "name": "stereoflo/open-weather-map-api",
+    "description": "open-weather-map-api",
+    "type": "library",
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "OpenWeatherMapApi\\": "src/"
+        }
+    }
+}
