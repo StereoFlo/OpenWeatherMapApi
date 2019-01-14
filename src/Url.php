@@ -9,7 +9,8 @@ namespace OpenWeatherMapApi;
 class Url implements UrlInterface
 {
     const TYPE_WEATHER = 'weather';
-    const TYPE_FORECAST = 'forecast';
+    const TYPE_FORECAST5 = 'forecast';
+    const TYPE_FORECAST16 = 'forecast/daily';
     const URL_PATTERN = 'https://api.openweathermap.org/data/2.5/%s?%s=%s&appid=%s';
 
     /**
@@ -46,7 +47,7 @@ class Url implements UrlInterface
      */
     public function setType(string $type): Url
     {
-        if (!\in_array($type, [self::TYPE_FORECAST, self::TYPE_WEATHER])) {
+        if (!\in_array($type, [self::TYPE_FORECAST5, self::TYPE_WEATHER, self::TYPE_FORECAST16])) {
             throw new \Exception('the type is wrong: ' . $type);
         }
         $this->type = $type;
