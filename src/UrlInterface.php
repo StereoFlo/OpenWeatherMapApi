@@ -27,4 +27,9 @@ interface UrlInterface
      * @return string
      */
     public function getUrl(): string ;
+
+    /**
+     * @return string
+     */
+    public function __toString(): string ;
 }

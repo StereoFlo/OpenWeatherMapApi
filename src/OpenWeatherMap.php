@@ -36,6 +36,8 @@ class OpenWeatherMap
      *
      * @param ClientInterface $client
      * @param UrlInterface    $url
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function __construct(ClientInterface $client, UrlInterface $url)
     {
@@ -84,26 +86,39 @@ class OpenWeatherMap
 
     /**
      * fillData
+     * @return self
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
      */
-    public function fillData()
+    public function fillData(): self
     {
         try {
             $url = $this->url->getUrl();
             $response = $this->client->request('get', $url);
             $tmpArr = \json_decode($response->getBody(), true);
-            if (isset($tmpArr['cnt']) && isset($tmpArr['list'])) {
-                $this->count = $tmpArr['cnt'];
-                foreach ($tmpArr['list'] as $item) {
-                    $this->stack[] = Data::create($item);
-                }
-            } else {
-                $this->count = 1;
-                $this->stack[] = Data::create($tmpArr);
-            }
+            $this->fillStack($tmpArr);
             return $this;
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage());
         }
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return OpenWeatherMap
+     */
+    private function fillStack(array $data): self
+    {
+        if (isset($data['cnt']) && isset($data['list'])) {
+            $this->count = $data['cnt'];
+            foreach ($data['list'] as $item) {
+                $this->stack[] = Data::create($item);
+            }
+            return $this;
+        }
+        $this->count = 1;
+        $this->stack[] = Data::create($data);
+        return $this;
     }
 }
