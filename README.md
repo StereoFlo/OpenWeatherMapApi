@@ -4,15 +4,14 @@
  
  ####  Погода на день
  
- Погода на день (используя буквенный указатель города и страны)
+ Погода на день
  
   ```php
-$url = new \OpenWeatherMapApi\Url();
-$url->setAppId('api_key')
-    ->setType(\OpenWeatherMapApi\Url::TYPE_WEATHER)
-    ->setCity((new \OpenWeatherMapApi\City())->setQuery('Saint Petersburg, RU'));
+$city   = new City('Saint Petersburg, RU', 498817); // или буквенный указатель/или айди
+$url    = new Url('appId', Url::TYPE_WEATHER, $city);
+$client = new Client();
+$owm    = new OpenWeatherMap($client, $url);
 
-$owm = new \OpenWeatherMapApi\OpenWeatherMap(new \GuzzleHttp\Client(), $url);
 var_dump($owm->getCount());
 var_dump($owm->getStack());
 
@@ -23,12 +22,22 @@ var_dump($owm->getStack());
   Погода на 5 дней (используя буквенный указатель города и страны)
   
   ```php
-$url = new \OpenWeatherMapApi\Url();
-$url->setAppId('api_key')
-    ->setType(\OpenWeatherMapApi\Url::TYPE_FORECAST)
-    ->setCity((new \OpenWeatherMapApi\City())->setQuery('Saint Petersburg, RU'));
+$city   = new City('Saint Petersburg, RU', 498817); // или буквенный указатель/или айди
+$url    = new Url('appId', Url::TYPE_FORECAST5, $city);
+$client = new Client();
+$owm    = new OpenWeatherMap($client, $url);
 
-$owm = new \OpenWeatherMapApi\OpenWeatherMap(new \GuzzleHttp\Client(), $url);
+var_dump($owm->getCount());
+var_dump($owm->getStack());
+```
+
+ #### Погода на 16 дней (только платные аккаунты)
+ 
+  ```php
+$city   = new City('Saint Petersburg, RU', 498817); // или буквенный указатель/или айди
+$url    = new Url('appId', Url::TYPE_FORECAST16, $city);
+$client = new Client();
+$owm    = new OpenWeatherMap($client, $url);
 
 var_dump($owm->getCount());
 var_dump($owm->getStack());
