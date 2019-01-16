@@ -29,6 +29,22 @@ class Url implements UrlInterface
     private $city;
 
     /**
+     * Url constructor.
+     *
+     * @param string $appId
+     * @param string $type
+     * @param City   $city
+     *
+     * @throws \Exception
+     */
+    public function __construct(string $appId, string $type, City $city)
+    {
+        $this->setAppId($appId);
+        $this->setType($type);
+        $this->setCity($city);
+    }
+
+    /**
      * @param string $appId
      *
      * @return Url

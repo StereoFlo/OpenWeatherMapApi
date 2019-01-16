@@ -18,23 +18,18 @@ class City
      */
     private $id;
 
+    public function __construct(?string $query, ?int $id)
+    {
+        $this->query = $query;
+        $this->id    = $id;
+    }
+
     /**
-     * @return string
+     * @return null|string
      */
     public function getQuery(): ?string
     {
         return $this->query;
-    }
-
-    /**
-     * @param string $query
-     *
-     * @return City
-     */
-    public function setQuery(string $query): City
-    {
-        $this->query = $query;
-        return $this;
     }
 
     /**
@@ -43,16 +38,5 @@ class City
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     *
-     * @return City
-     */
-    public function setId(int $id): City
-    {
-        $this->id = $id;
-        return $this;
     }
 }
