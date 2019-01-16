@@ -2,8 +2,9 @@
 
 namespace OpenWeatherMapApi;
 
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Request;
 use OpenWeatherMapApi\Data\Data;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * Class OpenWeatherMap
@@ -37,7 +38,7 @@ class OpenWeatherMap
      * @param ClientInterface $client
      * @param UrlInterface    $url
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function __construct(ClientInterface $client, UrlInterface $url)
     {
@@ -87,14 +88,14 @@ class OpenWeatherMap
     /**
      * fillData
      * @return self
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \Exception
      */
     public function fillData(): self
     {
         try {
             $url = $this->url->getUrl();
-            $response = $this->client->request('get', $url);
+            $response = $this->client->sendRequest(new Request('get', $url));
             $tmpArr = \json_decode($response->getBody(), true);
             $this->fillStack($tmpArr);
             return $this;

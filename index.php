@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Client;
+use AlexTartan\GuzzlePsr18Adapter\Client;
 use OpenWeatherMapApi\City;
 use OpenWeatherMapApi\OpenWeatherMap;
 use OpenWeatherMapApi\Url;
