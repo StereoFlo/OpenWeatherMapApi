@@ -2,6 +2,11 @@
 
  Позволяет получать погоду с сайта openweathermap.org
  
+ #### Установка
+ 
+ ```bash
+ composer require stereoflo/open-weather-map-api
+ ``` 
  ####  Погода на день
  
  Погода на день
