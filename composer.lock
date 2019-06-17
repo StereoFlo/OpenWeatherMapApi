@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8df615df949e23d58b02d97297be14a9",
+    "content-hash": "c1165b7d936db1b7487a09b364809ba8",
     "packages": [
         {
             "name": "alextartan/guzzle-psr18-adapter",
@@ -379,6 +379,30 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2016-02-11T07:05:27+00:00"
+        },
+        {
+            "name": "stereoflo/initializer",
+            "version": "v1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StereoFlo/initializer.git",
+                "reference": "7bb3199038cdac6e9fb7898711e12d5c29ba5fc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StereoFlo/initializer/zipball/7bb3199038cdac6e9fb7898711e12d5c29ba5fc1",
+                "reference": "7bb3199038cdac6e9fb7898711e12d5c29ba5fc1",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Initializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "none",
+            "time": "2019-06-17T12:50:05+00:00"
         }
     ],
     "packages-dev": [],

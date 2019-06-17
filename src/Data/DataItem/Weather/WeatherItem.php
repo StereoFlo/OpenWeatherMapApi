@@ -2,7 +2,7 @@
 
 namespace OpenWeatherMapApi\Data\DataItem\Weather;
 
-use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+use Initializer\AbstractInitializer;
 
 /**
  * Class WeatherItem

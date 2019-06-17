@@ -2,6 +2,8 @@
 
 namespace OpenWeatherMapApi\Data;
 
+use Initializer\AbstractInitializer;
+use function is_array;
 use OpenWeatherMapApi\Data\DataItem\Clouds;
 use OpenWeatherMapApi\Data\DataItem\Coord;
 use OpenWeatherMapApi\Data\DataItem\Main;
@@ -10,7 +12,6 @@ use OpenWeatherMapApi\Data\DataItem\Snow;
 use OpenWeatherMapApi\Data\DataItem\Sys;
 use OpenWeatherMapApi\Data\DataItem\Weather\WeatherItem;
 use OpenWeatherMapApi\Data\DataItem\Wind;
-use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
 
 /**
  * Class Data
@@ -148,7 +149,7 @@ class Data extends AbstractInitializer
                 $this->coord = Coord::create($val);
                 break;
             case 'weather':
-                if (\is_array($val)) {
+                if (is_array($val)) {
                     foreach ($val as $weatherItem) {
                         $this->weather[] = WeatherItem::create($weatherItem);
                     }

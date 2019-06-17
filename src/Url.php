@@ -2,6 +2,10 @@
 
 namespace OpenWeatherMapApi;
 
+use Exception;
+use function in_array;
+use function sprintf;
+
 /**
  * Class Url
  * @package OpenWeatherMapApi
@@ -35,7 +39,7 @@ class Url implements UrlInterface
      * @param string $type
      * @param City   $city
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(string $appId, string $type, City $city)
     {
@@ -59,12 +63,12 @@ class Url implements UrlInterface
      * @param string $type
      *
      * @return Url
-     * @throws \Exception
+     * @throws Exception
      */
     public function setType(string $type): Url
     {
-        if (!\in_array($type, [self::TYPE_FORECAST5, self::TYPE_WEATHER, self::TYPE_FORECAST16])) {
-            throw new \Exception('the type is wrong: ' . $type);
+        if (!in_array($type, [self::TYPE_FORECAST5, self::TYPE_WEATHER, self::TYPE_FORECAST16])) {
+            throw new Exception('the type is wrong: ' . $type);
         }
         $this->type = $type;
         return $this;
@@ -95,8 +99,8 @@ class Url implements UrlInterface
     public function getUrl(): string
     {
         if ($this->city->getId()) {
-            return \sprintf(self::URL_PATTERN, $this->type, 'id', $this->city->getId(), $this->appId);
+            return sprintf(self::URL_PATTERN, $this->type, 'id', $this->city->getId(), $this->appId);
         }
-        return \sprintf(self::URL_PATTERN, $this->type, 'q', $this->city->getQuery(), $this->appId);
+        return sprintf(self::URL_PATTERN, $this->type, 'q', $this->city->getQuery(), $this->appId);
     }
 }

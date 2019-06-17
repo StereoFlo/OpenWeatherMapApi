@@ -2,7 +2,7 @@
 
 namespace OpenWeatherMapApi\Data\DataItem;
 
-use OpenWeatherMapApi\PropertyInitializer\AbstractInitializer;
+use Initializer\AbstractInitializer;
 
 /**
  * Class Clouds
