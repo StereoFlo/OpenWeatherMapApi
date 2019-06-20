@@ -14,10 +14,22 @@ class Sys extends AbstractInitializer
      * @var array
      */
     protected static $initPropertiesMap = [
+        'id'      => 'id',
+        'type'    => 'type',
         'country' => 'country',
         'sunrise' => 'sunrise',
         'sunset'  => 'sunset',
     ];
+
+    /**
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $type;
 
     /**
      * @var string
@@ -33,6 +45,22 @@ class Sys extends AbstractInitializer
      * @var string
      */
     protected $sunset;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
 
     /**
      * @return string
