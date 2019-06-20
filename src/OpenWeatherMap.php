@@ -57,6 +57,14 @@ class OpenWeatherMap
     }
 
     /**
+     * @return CityData
+     */
+    public function getCity(): CityData
+    {
+        return $this->city;
+    }
+
+    /**
      * @return int
      */
     public function getCount(): int
