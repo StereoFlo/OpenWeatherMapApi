@@ -24,12 +24,12 @@ class Sys extends AbstractInitializer
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
