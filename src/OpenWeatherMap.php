@@ -5,7 +5,6 @@ namespace OpenWeatherMapApi;
 use Exception;
 use GuzzleHttp\Psr7\Request;
 use function json_decode;
-use OpenWeatherMapApi\Data\City as CityData;
 use OpenWeatherMapApi\Data\Data;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -37,9 +36,19 @@ class OpenWeatherMap
     private $url;
 
     /**
-     * @var CityData
+     * @var int|null
      */
-    private $city;
+    private $cityId;
+
+    /**
+     * @var string|null
+     */
+    private $cityName;
+
+    /**
+     * @var int timestamp
+     */
+    private $timezone;
 
     /**
      * OpenWeatherMap constructor.
@@ -57,30 +66,11 @@ class OpenWeatherMap
     }
 
     /**
-     * @return CityData
-     */
-    public function getCity(): CityData
-    {
-        return $this->city;
-    }
-
-    /**
      * @return int
      */
     public function getCount(): int
     {
         return $this->count;
-    }
-
-    /**
-     * @param int $count
-     *
-     * @return OpenWeatherMap
-     */
-    public function setCount(int $count): OpenWeatherMap
-    {
-        $this->count = $count;
-        return $this;
     }
 
     /**
@@ -92,14 +82,27 @@ class OpenWeatherMap
     }
 
     /**
-     * @param Data[] $stack
-     *
-     * @return OpenWeatherMap
+     * @return int|null
      */
-    public function setStack(array $stack): OpenWeatherMap
+    public function getCityId(): ?int
     {
-        $this->stack = $stack;
-        return $this;
+        return $this->cityId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCityName(): ?string
+    {
+        return $this->cityName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimezone(): int
+    {
+        return $this->timezone;
     }
 
     /**
@@ -135,9 +138,19 @@ class OpenWeatherMap
             }
             return $this;
         }
-        if (isset($data['city'])) {
-            $this->city = CityData::create($data['city']);
+
+        if (isset($data['id'])) {
+            $this->cityId = $data['id'];
         }
+
+        if (isset($data['name'])) {
+            $this->cityName = $data['name'];
+        }
+
+        if (isset($data['timezone'])) {
+            $this->timezone = $data['timezone'];
+        }
+
         $this->count = 1;
         $this->stack[] = Data::create($data);
         return $this;
