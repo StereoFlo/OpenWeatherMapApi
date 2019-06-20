@@ -5,6 +5,7 @@ namespace OpenWeatherMapApi;
 use Exception;
 use GuzzleHttp\Psr7\Request;
 use function json_decode;
+use OpenWeatherMapApi\Data\City as CityData;
 use OpenWeatherMapApi\Data\Data;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -34,6 +35,11 @@ class OpenWeatherMap
      * @var UrlInterface
      */
     private $url;
+
+    /**
+     * @var CityData
+     */
+    private $city;
 
     /**
      * OpenWeatherMap constructor.
@@ -120,6 +126,9 @@ class OpenWeatherMap
                 $this->stack[] = Data::create($item);
             }
             return $this;
+        }
+        if (isset($data['city'])) {
+            $this->city = CityData::create($data['city']);
         }
         $this->count = 1;
         $this->stack[] = Data::create($data);
